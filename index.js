@@ -120,8 +120,11 @@ Aşağıdaki periyotSkoru() fonksiyonununda aşağıdakileri yapınız:
 }
   */
 
-function periyotSkoru(/*Kodunuzu buraya yazınız*/) {
-  /*Kodunuzu buraya yazınız*/
+function periyotSkoru(aTakimSkoru) {
+  return {
+    EvSahibi: aTakimSkoru(),
+    KonukTakim: aTakimSkoru(),
+  };
 }
 
 /* Zorlayıcı Görev 5: skorTabelasi() 
