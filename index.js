@@ -34,7 +34,8 @@ console.log(
   Aşağıdaki skor1 ve skor2 kodlarını inceleyiniz ve aşağıdaki soruları altına not alarak cevaplayın
   
   1. skor1 ve skor2 arasındaki fark nedir?
-  skor1'de skoru güncelleyen fonksiyon başka bir fonksiyona gömülmüş/gizlenmiş. skor2 isi skoru kendisi güncelliyor.
+  skor1'de skoru güncelleyen fonksiyon başka bir fonksiyona gömülmüş/gizlenmiş ve lokal bir değişkeni güncelliyor.
+  skor2 ise skoru kendisi, global değüişkeni güncelliyor.
   
   2. Hangisi bir closure kullanmaktadır? Nasıl tarif edebilirsin? (yarınki derste öğreneceksin :) )
   skor1 closure kullanıyor.
@@ -80,6 +81,12 @@ function takimSkoru() {
   return tSkoru;
 }
 
+// Proje Çözümü:
+
+function takimSkoru() {
+  return Math.floor(10 + 15 * Math.random());
+}
+
 /* Görev 3: macSonucu() 
 Aşağıdaki macSonucu() fonksiyonununda aşağıdakileri yapınız:
   1. Görev 2'de oluşturduğunuz 'takimSkoru'nu callback fonskiyonunu olarak ilk parametrede alın
@@ -96,13 +103,13 @@ Aşağıdaki macSonucu() fonksiyonununda aşağıdakileri yapınız:
 */
 
 function macSonucu(aTakimSkoru, aCeyrek) {
-  let evSahibi = 0;
-  let konukTakim = 0;
+  let evSkor = 0;
+  let konukSkor = 0;
   for (let i = 0; i < aCeyrek; i++) {
-    evSahibi += aTakimSkoru();
-    konukTakim += aTakimSkoru();
+    evSkor += aTakimSkoru();
+    konukSkor += aTakimSkoru();
   }
-  return { EvSahibi: evSahibi, KonukTakim: konukTakim };
+  return { EvSahibi: evSkor, KonukTakim: konukSkor };
 }
 
 console.log(macSonucu(takimSkoru, 4));
@@ -162,7 +169,7 @@ function skorTabelasi(aPeriyotSkoru, aTakimSkoru, aCeyrekSayisi) {
   var toplamEv = 0;
   var toplamKonuk = 0;
 
-  for (let i = 0; i < aCeyrekSayisi; i++) {
+  for (let i = 1; i <= aCeyrekSayisi; i++) {
     let evSahibi = aPeriyotSkoru(aTakimSkoru).EvSahibi;
     toplamEv += evSahibi;
 
@@ -170,7 +177,7 @@ function skorTabelasi(aPeriyotSkoru, aTakimSkoru, aCeyrekSayisi) {
     toplamKonuk += konukTakim;
 
     console.log(
-      `${i + 1}. Periyot: Ev Sahibi ${evSahibi} - Konuk Takım ${konukTakim}`
+      `${i}. Periyot: Ev Sahibi ${evSahibi} - Konuk Takım ${konukTakim}`
     );
   }
 
@@ -188,7 +195,6 @@ function skorTabelasi(aPeriyotSkoru, aTakimSkoru, aCeyrekSayisi) {
     );
     i++;
   }
-
   console.log(`Maç Sonucu: Ev Sahibi ${toplamEv} - Konuk Takım ${toplamKonuk}`);
 }
 
